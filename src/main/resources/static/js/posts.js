@@ -1,4 +1,4 @@
-//Zabezpieczenie żeby ktos nie klikął cancel dwa razy gdy przegladarka laduje
+//Zabezpieczenie przed podwójnym przesłaniem formularza
 document.querySelector('.open-modal-button').addEventListener('click', function() {
     document.querySelector('.modal-background').style.display = 'flex';
 });
