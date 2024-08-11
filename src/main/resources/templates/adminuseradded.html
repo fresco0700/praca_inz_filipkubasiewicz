@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dodano użytkownika!</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/usermenu.css}">
+</head>
+
+<body>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+    </div>
+    <button class="back-button" onclick="location.href='/';">Dashboard</button>
+    <div class="nav-right">
+        <span>Zalogowano jako: <span class="bold" th:text="${#authentication.name}">AnonymusUser</span></span>
+    </div>
+</nav>
+
+<div class="info-container">
+    <div class="info-content">
+        <div>
+            <h2>Pomyślnie dodano użytkownika!</h2>
+            Login: <p th:text="${login}"></p>
+        </div>
+        <div class="button-container">
+            <button class="back-button" onclick="location.href='/admin/adduser';">Powrót</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

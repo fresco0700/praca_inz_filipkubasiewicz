@@ -1,0 +1,97 @@
+textarea {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: whitesmoke;
+}
+
+input {
+    font-size: 1rem;
+    margin-top: 1px;
+    padding: 1px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: whitesmoke;
+}
+
+input[type="image"] {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    height: 16px;
+    width: auto;
+}
+
+.sender-menu {
+    width: 60%;
+    margin: auto;
+    position: relative;
+}
+.adder-menu {
+    width: 60%;
+    margin: auto;
+    position: relative;
+}
+.button-menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.rounded-box {
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: rgba(60, 60, 60);
+    color: #FFF;
+}
+
+#numberList {
+    list-style-type: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#numberList li {
+    padding: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+#numberList li:hover {
+    background-color: #555;
+}
+
+
+
+
+
+/*Style dla suwaka*/
+#numberList::-webkit-scrollbar {
+    width: 10px;  /* szerokość paska przewijania */
+}
+
+#numberList::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);  /* tło suwaka */
+    border-radius: 5px;
+}
+
+#numberList::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);  /* kolor "pigułki" suwaka */
+    border-radius: 5px;  /* zaokrąglenie rogów "pigułki" suwaka */
+    border: 2px solid transparent;  /* przestrzeń między "pigułką" suwaka a krawędzią */
+    background-clip: content-box;  /* nie pozwoli na rozciągnięcie tła "pigułki" suwaka poza granice content-box */
+}
+
+/* Podświetlenie "pigułki" suwaka podczas najazdu */
+#numberList::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+

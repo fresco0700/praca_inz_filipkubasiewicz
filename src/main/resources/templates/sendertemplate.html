@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sendertemplate.css}" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var loggedInUser = /*[[${#authentication.name}]]*/ 'defaultUser';
+        /*]]>*/
+    </script>
+</head>
+<body class="dark">
+<button class="menu-button-left" onclick="location.href='/';">Dashboard</button>
+<button class="menu-button-left" onclick="location.href='/zmianowy/szukajwpis/';">Wyszukaj wpis</button>
+<button class="menu-button-left" onclick="location.href='/logout';">Wyloguj</button>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+    </div>
+    <div></div>
+    <div class="nav-right">
+        <span id="loggedInUser" data-username="${#authentication.name}">Zalogowano jako: <span class="bold" th:text="${#authentication.name}"></span></span>
+    </div>
+
+</nav>
+<button class="add-post-button" onclick="openAddModal()">Add Template</button>
+
+
+<div th:each="template : ${allTemplates}">
+    <div class="post-container">
+        <p class="post-id" th:text="${template.id}"></p>
+        <p class="post-title" th:text="${template.name}"></p>
+        <p class="post-date" th:text="${template.lastSend}"></p>
+        <p class="post-createdDate" th:text="${template.createdDate}"></p>
+        <p class="post-creator" th:text="${template.creator}"></p>
+        <p class="post-lastEditor" th:text="${template.lastEditor}"></p>
+        <p class="post-lastEdited" th:text="${template.lastEdited}"></p>
+        <p class="post-contacts" th:text="${template.contacts}"></p>
+        <p class="post-contentSms" th:text="${template.contentSms}"></p>
+        <p class="post-contentMail" th:text="${template.contentMail}"></p>
+
+        <button class="blue-button" th:attr="data-id=${template.id}" onclick="openEditModal(this.getAttribute('data-id'))">Edit</button>
+        <form action="#" th:action="@{/sendersms/deleteTemplate}" method="post" style="display:inline;">
+            <input type="hidden" th:name="templateId" th:value="${template.id}" />
+            <button type="submit" class="blue-button">Delete</button>
+        </form>
+    </div>
+</div>
+
+
+<!--Modal do edycji-->
+<div id="editModal" class="modal-background">
+    <div class="modal-content">
+        <h2>Edit Template</h2>
+        <form id="editForm" action="#" th:action="@{/sendersms/editTemplate}" method="post">
+            <input type="hidden" id="editId" name="templateId" />
+            <input type="text" id="editName" name="name" placeholder="Template Name" />
+            <button type="submit" class="blue-button">Save Changes</button>
+        </form>
+        <button class="blue-button" onclick="closeEditModal()">Cancel</button>
+    </div>
+</div>
+
+
+<!--Modal do dodawania-->
+<div id="addModal" class="modal-background">
+    <div class="modal-content">
+        <h2>Add Template</h2>
+        <form id="addForm" action="#" th:action="@{/sendersms/addTemplate}" method="post">
+            <label for="name">Nazwa Szablonu:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="selectedContacts">Odbiorcy maila:</label><br>
+            <input type="hidden" id="contactIds" name="contactIds" readonly>
+            <select id="selectedContacts" multiple>
+                <option th:each="contact : ${allContacts}"
+                        th:value="${contact.id}"
+                        th:text="${contact.name} + ' ' + ${contact.surname} + ' (' + ${contact.email} + ')'"
+                        th:attr="data-id=${contact.id}">
+                </option>
+            </select><br>
+            <label for="contentMail">Treść maila:</label><br>
+            <input type="text" id="contentMail" name="contentMail" required><br>
+
+            <label for="contentSms">Treść SMS:</label><br>
+            <input type="text" id="contentSms" name="contentSms" required><br>
+
+            <input class="blue-button" type="submit" value="Dodaj Szablon">
+
+        </form>
+        <button class="blue-button" onclick="closeAddModal()">Cancel</button>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript" th:src="@{/js/sendertemplate.js}"></script>

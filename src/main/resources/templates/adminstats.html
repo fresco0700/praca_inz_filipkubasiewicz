@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Statystyki</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/usermenu.css}">
+    <style>
+        table {
+            color: whitesmoke;
+        }
+        thead{            color: whitesmoke;
+        }
+        tbody{            color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+    </div>
+    <div>
+        <button class="back-button" onclick="location.href='/';">Dashboard</button>
+        <button class="back-button" onclick="location.href='/admin/';">Menu admina</button>
+    </div>
+    <div class="nav-right">
+        <span>Zalogowano jako: <span class="bold" th:text="${#authentication.name}">AnonymusUser</span></span>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Najczęściej tworzący</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Autor</th>
+            <th>Liczba stworzonych postów</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${createdPosts}">
+            <td th:text="${stat[0]}"></td>
+            <td th:text="${stat[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    padding-block: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+body.dark {
+    background-color: whitesmoke;
+    color: rgba(36, 36, 36);
+}
+nav > .header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+body.dark nav > .header > #logo {
+    filter: invert(1)
+}
+
+nav > .header > #dark-mode-toggle {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+nav > button {
+    width: fit-content;
+}
+
+nav > .nav-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background-color: rgba(36, 36, 36);
+    color: whitesmoke;
+}
+.post-container {
+    border: 3px solid royalblue;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    width: min(90%, 1200px);
+    overflow-wrap: break-word;
+    position: relative;
+}
+.post-id {
+    font-size: 0.90rem;
+}
+.post-author {
+    font-size: 1.10rem;
+}
+.post-date {
+    font-size: 1.10rem;
+}
+.post-title {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.post-state {
+    font-size: 1.2rem;
+    text-align: center;
+}
+.post-content {
+    font-size: 16px;
+    margin-top: 10px;
+}
+.informacyjnie {
+    color: royalblue;
+}
+
+.do-realizacji {
+    color: red;
+    animation: pulse 1s infinite;
+}
+
+.zrealizowano {
+    color: limegreen;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.add-post-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.back-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.blue-button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: hsl(225, 73%, 57%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+#post-form > .opcje > select {
+    padding: 0.6rem;
+    background-color: hsl(0, 0%, 24%);
+    color: hsl(0, 0%, 96%);
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+}
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: rgba(36, 36, 36);
+    padding: 20px;
+    width: min(100% - 4rem, 900px);
+    border-radius: 0.5rem;
+    background-blend-mode: darken;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    padding-bottom: 40px;
+    transition: all 0.3s ease;
+}
+.post-actions {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.post-container:hover .post-actions {
+    display: flex;
+}
+.open-modal-button {
+    cursor: pointer;
+    background-color: royalblue;
+    border-radius: 5px;
+    margin: 2px;
+    align-self: center;
+    padding: 3px;
+    color: white;
+    border: none;
+}
+#cancel-button {
+    cursor: pointer;
+    background-color: royalblue;
+    border-radius: 5px;
+    margin: 0 auto;
+
+    padding: 3px;
+    color: white;
+    border: none;}
+.edit-post-button,#changeBackground {
+    align-self: center;
+    margin: 2px;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+}
+.delete-post-button {
+    align-self: center;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    margin: 2px;
+}
+
+.post-container:hover .post-actions {
+    opacity: 1;
+}
+.edit-post-button, .delete-post-button, .add-post-button {
+    transition: transform .2s;
+}
+.edit-post-button:hover, .delete-post-button:hover, .add-post-button:hover {
+    transform: scale(1.1);
+}
+.centered-button {
+    display: block;
+    margin: 0 auto;
+    padding: 3px;
+
+
+}
+.header {
+
+    font-family: Dubai;
+    float: right;
+    padding: 15px;
+    font-size: 20px;
+}
+a:link {
+    color: green;
+}
+
+a:visited {
+    color: grey;
+}
+.back-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+body nav > .header > #logo {
+    object-fit: scale-down;
+}
+.post-content img {
+    max-width: 100%;
+}
+
+.separator {
+    height: 1px;
+    background-color: #666464;
+    margin: 5px 0;
+    width: 30%;
+}
+.menu-button-left {
+    width: 150px;
+    padding: 0.5rem;
+    #border-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: hsl(225, 73%, 57%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    left: -50px;
+    transition: left 0.5s ease;
+    z-index: 1000;
+}
+input {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #333;
+    color: whitesmoke;
+}
+
+.likes-count {
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+.thumb-up-icon {
+    width: 30px;
+    height: 30px;
+    background-color: royalblue;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-likes {
+    position: absolute;
+    background-color: #1a1a1a;
+    border: 1px solid black;
+    padding: 10px;
+    display: none;
+}
+
+.like-post-button {
+    align-self: center;
+    margin: 2px;
+    bottom: 0;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+}
+#successBanner {
+    display: none;
+    background-color: green;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    z-index: 1000;
+}
+#errorBanner {
+    display: none;
+    background-color: red;
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    z-index: 1000;
+}

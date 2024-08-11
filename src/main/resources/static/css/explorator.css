@@ -1,0 +1,220 @@
+nav {
+    display: grid;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    padding-block: 2rem;
+    color: whitesmoke;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background-color: rgba(36, 36, 36);
+    color: whitesmoke;
+}
+.back-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.blue-button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: hsl(225, 73%, 57%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.red-button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: darkred;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+.delete-form{
+    display: inline-block;
+}
+
+
+.transparent-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    border: 2px solid royalblue;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 5px;
+
+}
+
+.transparent-form input, .transparent-form select {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #333;
+    color: whitesmoke;
+}
+
+.transparent-form button {
+    align-self: center;
+    width: max-content;
+}
+
+@media screen and (min-width: 600px) {
+    .transparent-form {
+        flex-direction: row;
+        align-items: center;
+        width: 60%;
+    }
+
+    .transparent-form input, .transparent-form select {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+}
+
+
+/*Dodatki*/
+
+body nav > .header > #logo {
+    object-fit: scale-down;
+}
+body.dark {
+    background-color: whitesmoke;
+    color: rgba(36, 36, 36);
+}
+nav > .header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+body.dark nav > .header > #logo {
+    filter: invert(1)
+}
+
+nav > .header > #dark-mode-toggle {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+nav > button {
+    width: fit-content;
+}
+
+nav > .nav-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 50px 0;
+    color: whitesmoke;
+}
+
+select {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(92, 92, 92, 0.94);
+    color: whitesmoke;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+
+}
+
+tr:nth-child(even) {
+    background-color: rgba(36, 36, 36);
+}
+
+
+/* Styl dla modala */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 15% auto;
+    padding: 20px;
+    border: 2px solid royalblue;
+    border-radius: 20px;
+    width: 50%;
+    color: whitesmoke;
+}
+
+.modal-content input {
+    flex-grow: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(92, 92, 92, 0.94);
+    color: whitesmoke;
+    margin-right: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus {
+    color: royalblue;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px) {
+    .modal-content {width: 90%;}}

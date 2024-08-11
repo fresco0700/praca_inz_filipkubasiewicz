@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/explorator.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user_menu.css}">
+    <meta charset="UTF-8">
+    <title>Wyszukiwarka czujek</title>
+
+</head>
+<body>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}">
+
+    </div>
+    <button class="back-button" onclick="location.href='/';">Dashboard</button>
+  <div class="user-menu">
+    <div class="nav-right">
+        <span>Zalogowano jako: <span class="bold" id="username" th:text="${#authentication.name}">AnonymusUser</span></span>
+    </div>
+    </div>
+</nav>
+<form class="transparent-form" action="/szukajczujki/find">
+    <select name="monitoringServer" id="monitoringServer" required>
+        <option value="0"  selected>Wszystkie Serwery Monitorujące</option>
+        <option value="1">Nagios Xi Cepik 2.0</option>
+        <option value="2">Nagios Xi ePUAP</option>
+        <option value="3">Nagios Xi SRP</option>
+        <option value="4">Nagios Xi DMZ (Grafana)</option>
+        <option value="5">Nagios Core eDowód</option>
+        <option value="6">Nagios Core ADsxP</option>
+        <option value="7">Nagios Core Cepik 1.0</option>
+        <option value="8">ManageEngine SRP</option>
+        <option value="9">Zabbix RID2</option>
+    </select>
+    <input type="text" name="servername" placeholder="Wpisz nazwe serwera">
+    <input type="text" name="servicename" placeholder="Wpisz nazwe czujki/triggera">
+    <button class="blue-button" type="submit">Szukaj</button>
+</form>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Narzędzie monitorujące</th>
+        <th>Serwer</th>
+        <th>Nazwa</th>
+        <th>Administrator</th>
+        <th>Opis</th>
+        <th>Akcja</th>
+    </tr>
+    <tr th:each="czujka : ${results}">
+        <td th:text="${czujka.id}"></td>
+        <td th:text="${czujka.monitoringServerName}"></td>
+        <td th:text="${czujka.server}"></td>
+        <td th:text="${czujka.name}"></td>
+        <td th:text="${czujka.admin}"></td>
+        <td th:text="${czujka.description}"></td>
+        <td>
+            <button class="edit-btn blue-button" th:attr="data-id=${czujka.id}">Edytuj</button>
+            <form onsubmit="return confirm('Czy jesteś pewny/a, że chcesz usunąć wiersz?');" class="delete-form" action="/szukajczujki/delete" method="post" >
+                <input type="hidden" id="delete-id" th:value="${czujka.id}" name="id" />
+                <button type="submit" class="delete-btn red-button">Usuń</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="/szukajczujki/edit" method="post">
+            <input type="hidden" id="edit-id" name="id" />
+            <input type="text" id="edit-server" name="server" placeholder="Wpisz nazwe serwera"/>
+            <input type="text" id="edit-name" name="name" placeholder="Wpisz nazwe czujki/triggera"/>
+            <input type="text" id="edit-admin" name="admin" placeholder="Wpisz administratora odpowiedzialnego"/>
+            <input type="text" id="edit-description" name="description" placeholder="Wpisz opis czujki"/>
+            <button type="submit" class="blue-button">Zapisz zmiany</button>
+        </form>
+    </div>
+</div>
+<button class="add-btn blue-button" >Dodaj</button>
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="/szukajczujki/add" method="post">
+            <select name="monitoringserverid" id="monitoringServer" required>
+                <option value="" disabled selected>Wybierz monitoring</option>
+                <option value="1">Nagios Xi Cepik 2.0</option>
+                <option value="2">Nagios Xi ePUAP</option>
+                <option value="3">Nagios Xi SRP</option>
+                <option value="4">Nagios Xi DMZ (Grafana)</option>
+                <option value="5">Nagios Core eDowód</option>
+                <option value="6">Nagios Core ADsxP</option>
+                <option value="7">Nagios Core Cepik 1.0</option>
+                <option value="8">ManageEngine SRP</option>
+                <option value="9">Zabbix RID2</option>
+            </select>
+            <input type="text" id="edit-server" name="server" placeholder="Wpisz nazwe serwera"/>
+            <input type="text" id="edit-name" name="name" placeholder="Wpisz nazwe czujki/triggera"/>
+            <input type="text" id="edit-admin" name="admin" placeholder="Wpisz administratora odpowiedzialnego"/>
+            <input type="text" id="edit-description" name="description" placeholder="Wpisz opis czujki"/>
+            <button type="submit" class="blue-button">Dodaj czujke</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/darkmode.js}"></script>
+<script type="text/javascript" th:src="@{/js/explorator.js}"></script>
+</body>
+</html>

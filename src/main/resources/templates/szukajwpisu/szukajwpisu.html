@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+
+<head>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/posts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/szukajwpisu.css}">
+
+
+    <title>Raport Zmianowy</title>
+
+    <script th:src="@{/ckeditor/ckeditor.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var loggedInUser = /*[[${#authentication.name}]]*/ 'defaultUser';
+        /*]]>*/
+    </script>
+</head>
+<body>
+<button class="menu-button-left" onclick="location.href='/';">Dashboard</button>
+<button class="menu-button-left" onclick="location.href='/zmianowy/';">Zmianowy</button>
+<button class="menu-button-left" onclick="location.href='/logout';">Wyloguj</button>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+
+    </div>
+    <div></div>
+    <div class="nav-right">
+        <span id="loggedInUser" data-username="${#authentication.name}">Zalogowano jako: <span class="bold" th:text="${#authentication.name}"></span></span>
+    </div>
+
+</nav>
+<form class="transparent-form" action="/zmianowy/szukajwpis/searchPosts">
+    <div class="text-inputs">
+        <input type="text" name="title" placeholder="Wyszukaj po tytule">
+        <input type="text" name="content" placeholder="Wyszukaj po zawartości">
+    </div>
+    <p class="date-range-text">Przedział daty utworzenia od-do</p>
+
+    <div class="date-inputs">
+        <input type="date" id="startDate" name="startDate" class="dark-input">
+
+        <input type="date" id="endDate" name="endDate" class="dark-input">
+    </div>
+    <div class="status-select">
+        <select name="status" id="status">
+            <option value="" selected>Wszystkie statusy</option>
+            <option value="Zrealizowano">Zrealizowano</option>
+            <option value="Do realizacji">Do realizacji</option>
+            <option value="Informacyjnie">Informacyjnie</option>
+
+        </select>
+    </div>
+    <div class="status-select">
+        <select name="visible" id="visible">
+            <option value="wszystkie" selected>Pokaż odkryte i ukryte</option>
+            <option value="odkryte">Pokaż tylko odkryte</option>
+            <option value="ukryte">Pokaż tylko ukryte</option>
+
+        </select>
+    </div>
+    <div class="date-inputs">
+    <button class="blue-button" type="submit">Szukaj</button>
+    </div>
+</form>
+
+
+<div th:each="post : ${posts}" class="post-container">
+    <div class="post-state" th:text="${post['state']}" th:classappend="${post['state'] == 'Informacyjnie' ? 'informacyjnie' : (post['state'] == 'Do realizacji' ? 'do-realizacji' : (post['state'] == 'Zrealizowano' ? 'zrealizowano' : ''))}"></div>
+    <div class="post-state" th:classappend="${!post['visible']} ? 'hiddenText'" th:text="${!post['visible']} ? 'UKRYTY' : ''"></div>
+    <div class="post-id" th:text="'ID: ' + ${post['id']}"></div>
+    <div class="post-author" th:text="'Autor: ' + ${post['autor']}"></div>
+    <div class="post-date" th:text="'Utworzono: ' + ${post['localDate']}"></div>
+    <div class="post-dateedit" th:text="'Edytowano: ' + ${post['editedBy']} +' '+ ${post['editedDate']}"></div>
+    <div class="post-dayornight" th:text="${post['dayornight']}"></div>
+    <div class="post-title" th:text="${post['title']}"></div>
+    <div class="separator"></div>
+    <div class="post-content" th:utext="${post['content']}"></div>
+
+    <div class="likes-count" onmouseover="showLikes(this)" onmouseout="hideLikes(this)">
+        <i class="thumb-up-icon">
+            <span th:text="${#lists.size(post['likes'])}"></span></i>
+    </div>
+    <div class="post-likes" style="display: none;">
+        <div th:each="like : ${post['likes']}">
+            <span th:text="${like.username}"></span>
+            <span th:text="${#temporals.format(like.likedAt, 'yyyy-MM-dd HH:mm:ss')}"></span>
+        </div>
+    </div>
+    <div class="post-files">
+        <ul>
+            <li th:each="file : ${post['files']}">
+                <a th:href="@{/zmianowy/download/{file}(file=${file})}"
+                   th:text="${#strings.substringAfter(file, '___')}"
+                   download>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="post-actions">
+    <button class="edit-post-button" th:attr="data-id=${post['id']},data-author=${post['autor']},data-title=${post['title']},data-content=${post['content']},data-state=${post['state']}">Edytuj</button>
+    <form onsubmit="return confirm('Czy jesteś pewny/a, że chcesz usunąć wpis?');" action="/zmianowy/szukajwpis/delete" method="post" class="delete-post-form">
+        <input type="hidden" name="id" th:value="${post['id']}">
+        <input  type="submit" value="Ukryj" class="delete-post-button">
+    </form>
+    <form onsubmit="return confirm('Czy jesteś pewny/a, odkryć wpis?');" action="/zmianowy/szukajwpis/undelete" method="post" class="delete-post-form">
+        <input type="hidden" name="id" th:value="${post['id']}">
+        <input  type="submit" value="Odkryj" class="undelete-post-button">
+    </form>
+    <button id="likeButton" class="like-post-button" th:data-post-id="${post.id}">Polub wpis</button>
+</div>
+</div>
+<div class="modal-background">
+<div class="modal-content">
+    <h2>Dodaj/Edytuj wpis</h2>
+    <form action="/zmianowy/addPost" method="post" id="post-form" enctype="multipart/form-data" onsubmit="myFunction()">
+        <input type="hidden" id="postId" name="id">
+        <input type="text" id="title" name="title" placeholder="Tytuł">
+        <div class="opcje">
+            <select name="dayornight" id="shift">
+                <option value=""></option>
+                <option value="Zmiana nocna">Zmiana nocna</option>
+                <option value="Zmiana dzienna">Zmiana dzienna</option>
+            </select>
+            <select name="state" id="state">
+                <option value="Informacyjnie">Informacyjnie</option>
+                <option value="Do realizacji">Do realizacji</option>
+                <option value="Zrealizowano">Zrealizowano</option>
+            </select>
+        </div>
+        <label for="editor">Treść:</label>
+        <textarea name="content" id="editor"></textarea>
+        <div class="modal-footer">
+            <input type="file" name="file" multiple />
+            <div class="modal-action-buttons">
+                <input class="open-modal-button blue-button" type="submit" value="Zapisz"
+                       id="submit-button">
+                <button type="button" class="blue-button" id="cancel-button" style="margin-left: 10px">Anuluj</button>
+    </form>
+</div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/posts.js}"></script>
+<script type="text/javascript" th:src="@{/js/darkmode.js}"></script>
+<script type="text/javascript" th:src="@{/js/searcherpost.js}"></script>
+
+
+</html>

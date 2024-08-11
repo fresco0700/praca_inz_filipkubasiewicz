@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 1.25rem;
+            background-color: rgba(36, 36, 36);
+            color: whitesmoke;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid royalblue;
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: min(90%, 600px);
+            overflow-wrap: break-word;
+        }
+
+        .login-button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .login-input {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: whitesmoke;
+        }
+
+        .login-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-button {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: royalblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: transform .2s;
+        }
+
+        .login-button:hover {
+            transform: scale(1.1);
+        }
+        .fadeout {
+            animation: fadeout 1s forwards;
+        }
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeout {
+            from {opacity: 1;}
+            to {opacity: 0;}
+        }
+
+
+        .snow {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 100%;
+        }
+
+        .window {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(#fff, 1));
+        }
+    </style>
+    <title>Logowanie</title>
+
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-title">
+        Zaloguj się
+    </div>
+    <div  th:if="${param.error}">
+        Nieprawidłowe dane logowania.
+    </div>
+    <div th:if="${param.logout}">
+        Wylogowano pomyślnie.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div><input class="login-input" type="text" name="username" placeholder="Nazwa użytkownika"/> </div>
+        <div><input class="login-input" type="password" name="password" placeholder="Hasło"/> </div>
+        <div class="login-button-container"><input class="login-button" type="submit" value="Zaloguj się"/></div>
+    </form>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginButton = document.querySelector('.login-button');
+        loginButton.addEventListener('click', function() {
+            document.body.classList.add('fadeout');
+        });
+    });
+</script>
+
+</html>

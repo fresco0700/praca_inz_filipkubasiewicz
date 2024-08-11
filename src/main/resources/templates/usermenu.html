@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Ustawienia użytkownika</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/usermenu.css}">
+</head>
+
+<body>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+    </div>
+    <button class="back-button" onclick="location.href='/';">Dashboard</button>
+    <div class="nav-right">
+        <span>Zalogowano jako: <span class="bold" th:text="${#authentication.name}">AnonymusUser</span></span>
+        <span>Role: <span class="bold" th:text="${#authentication.authorities}">AnonymusAuthority</span></span>
+    </div>
+</nav>
+
+<main>
+    <div class="buttons">
+        <button class="change-password-button blue-button" onclick="showModal()">Zmień hasło</button>
+        <button class="add-post-button blue-button" onclick="location.href='/logout';">Wyloguj</button>
+    </div>
+</main>
+
+<div class="modal-background" id="passwordModal">
+    <div class="modal-content">
+        <h3>Zmień hasło</h3>
+        <form action="/usermenu/changepassword" method="post" id="post-form">
+        <input type="password" name="currentPassword" placeholder="Obecne hasło" required>
+        <input type="password" name="newPassword" id="password1" placeholder="Nowe hasło (min 6 znaków)" required>
+        <div class="button-container">
+            <button class="password-change blue-button" id="submitBtn">Zatwierdź</button>
+
+            <button class="blue-button" id="cancel-button" onclick="hideModal(event)">Anuluj</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/js/darkmode.js}"></script>
+<script type="text/javascript" th:src="@{/js/menu.js}"></script>
+<script type="text/javascript" th:src="@{/js/user_menu.js}"></script>
+</body>
+</html>

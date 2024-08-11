@@ -1,0 +1,250 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    padding-block: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+body.dark {
+    color: whitesmoke;
+}
+nav > .header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+
+
+nav > .header > #dark-mode-toggle {
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+
+nav > button {
+    width: fit-content;
+}
+
+nav > .nav-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background-color: rgba(36, 36, 36);
+    color: whitesmoke;
+}
+.post-container {
+    border: 3px solid royalblue;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    width: min(90%, 1200px);
+    overflow-wrap: break-word;
+    position: relative;
+    min-width: 400px;
+}
+.post-id {
+    font-size: 0.90rem;
+}
+.post-author {
+    font-size: 1.10rem;
+}
+.post-date {
+    font-size: 1.10rem;
+}
+.post-title {
+    font-size: 1rem;
+    margin-top: 10px;
+
+}
+.post-state {
+    font-size: 1.2rem;
+    text-align: center;
+}
+.post-content {
+    font-size: 16px;
+    margin-top: 10px;
+}
+.informacyjnie {
+    color: royalblue;
+}
+
+.do-realizacji {
+    color: red;
+    animation: pulse 1s infinite;
+}
+
+.zrealizowano {
+    color: limegreen;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.add-post-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.back-button {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.blue-button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: hsl(225, 73%, 57%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+#post-form > .opcje > select {
+    padding: 0.6rem;
+    background-color: hsl(0, 0%, 24%);
+    color: hsl(0, 0%, 96%);
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+}
+.modal-background {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: rgba(36, 36, 36);
+    padding: 20px;
+    width: min(100% - 4rem, 900px);
+    border-radius: 0.5rem;
+    background-blend-mode: darken;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: whitesmoke;
+}
+
+input {
+    font-size: 1rem;
+    margin-top: 1px;
+    padding: 1px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: whitesmoke;
+}
+
+.menu-button-left {
+    width: 150px;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: hsl(225, 73%, 57%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    left: -50px;
+    transition: left 0.5s ease;
+    z-index: 1000;
+}
+
+.toggle .arrow {
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.master-list h3, .slave-list h4 {
+    cursor: pointer;
+}
+
+.master-list ul, .slave-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.master-list ul {
+    padding-left: 20px;
+}
+
+.slave-list ul {
+    padding-left: 60px;
+}
+
+.master-list ul li, .slave-list ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.master-list h3 .arrow, .slave-list h4 .arrow {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+

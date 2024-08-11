@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Panel operatora NOC</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}">
+</head>
+
+<body>
+<nav>
+    <div class="header">
+        <img id="logo" th:src="@{/img/1.png}" alt="logo-houston">
+        <img id="dark-mode-toggle" th:src="@{/img/dark-light-mode.png}"></img>
+
+
+
+    </div>
+    <div></div>
+    <div class="nav-right">
+        <span>Zalogowano jako: <span class="bold" th:text="${#authentication.name}">AnonymusUser</span></span>
+    </div>
+</nav>
+<main>
+    <div class="buttons">
+        <button class="add-post-button blue-button" onclick="location.href='/zmianowy/';">Raport
+            Zmianowy</button>
+        <button class="add-post-button blue-button" onclick="location.href='/szukajczujki/';">Wyszukiwarka
+            Czujek</button>
+        <button class="add-post-button blue-button" onclick="location.href='/sendersms/';">Sender SMS</button>
+        <br>
+        <button class="add-post-button blue-button"
+                th:if="${#authentication.authorities.![authority].contains('ADMIN')}"
+                onclick="location.href='/admin/';">Administracja</button>
+        <button class="add-post-button blue-button" onclick="location.href='/usermenu';">Ustawienia użytkownika</button>
+        <button class="add-post-button blue-button" onclick="location.href='/logout';">Wyloguj</button>
+    </div>
+</main>
+<script type="text/javascript" th:src="@{/js/darkmode.js}"></script>
+<script type="text/javascript" th:src="@{/js/menu.js}"></script>
+</body>
+</html>
