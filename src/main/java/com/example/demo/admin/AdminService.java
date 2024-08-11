@@ -70,20 +70,18 @@ public class AdminService {
     }
     public String addUser(String login, String password, ERole role) {
         String encodedPassword = bCryptPasswordEncoder.encode(password);
-
         boolean UserExist = userRepository.findByUsername(login).isPresent();
-
-        if (UserExist){return "Użytkownik już istnieje";}
+        if (UserExist) return "Użytkownik już istnieje";
         User user = new User();
         user.setUsername(login);
         user.setPassword(encodedPassword);
-        Optional<com.example.demo.security.Role> roleFromDB = roleRepository.findByName(role);
+        Optional<Role> roleFromDB = roleRepository.findByName(role);
         if (roleFromDB.isPresent()) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleFromDB.get());
             user.setRoles(roles);
         } else {
-            return "404";
+            return "Nie znaleźono takiej roli";
         }
         userRepository.save(user);
         return user.getUsername();

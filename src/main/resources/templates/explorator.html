@@ -23,16 +23,10 @@
 </nav>
 <form class="transparent-form" action="/szukajczujki/find">
     <select name="monitoringServer" id="monitoringServer" required>
-        <option value="0"  selected>Wszystkie Serwery Monitorujące</option>
-        <option value="1">Nagios Xi Cepik 2.0</option>
-        <option value="2">Nagios Xi ePUAP</option>
-        <option value="3">Nagios Xi SRP</option>
-        <option value="4">Nagios Xi DMZ (Grafana)</option>
-        <option value="5">Nagios Core eDowód</option>
-        <option value="6">Nagios Core ADsxP</option>
-        <option value="7">Nagios Core Cepik 1.0</option>
-        <option value="8">ManageEngine SRP</option>
-        <option value="9">Zabbix RID2</option>
+        <option value="0"  selected>Wszystkie Monitoringi</option>
+        <option value="1">Nagios Xi</option>
+        <option value="2">Zabbix</option>
+
     </select>
     <input type="text" name="servername" placeholder="Wpisz nazwe serwera">
     <input type="text" name="servicename" placeholder="Wpisz nazwe czujki/triggera">
@@ -86,15 +80,8 @@
         <form action="/szukajczujki/add" method="post">
             <select name="monitoringserverid" id="monitoringServer" required>
                 <option value="" disabled selected>Wybierz monitoring</option>
-                <option value="1">Nagios Xi Cepik 2.0</option>
-                <option value="2">Nagios Xi ePUAP</option>
-                <option value="3">Nagios Xi SRP</option>
-                <option value="4">Nagios Xi DMZ (Grafana)</option>
-                <option value="5">Nagios Core eDowód</option>
-                <option value="6">Nagios Core ADsxP</option>
-                <option value="7">Nagios Core Cepik 1.0</option>
-                <option value="8">ManageEngine SRP</option>
-                <option value="9">Zabbix RID2</option>
+                <option value="1">Nagios Xi</option>
+                <option value="2">Zabbix</option>
             </select>
             <input type="text" id="edit-server" name="server" placeholder="Wpisz nazwe serwera"/>
             <input type="text" id="edit-name" name="name" placeholder="Wpisz nazwe czujki/triggera"/>
