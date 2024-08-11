@@ -152,18 +152,6 @@ document.addEventListener('mousemove', function (e) {
     });
 });
 
-//To już nawet nie pamiętam co było
-document.getElementById('download').addEventListener('click', function() {
-    html2canvas(document.body).then(canvas => {
-        var link = document.createElement('a');
-        var currentDate = new Date();
-        var dateString = currentDate.toISOString().slice(0, 10);
-
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'raport' + dateString + '.png';
-        link.click();
-    });
-});
 //Pokazanie kto polajkowal post podczas najeżdżania na liczbe lajków na poście
 function showLikes(element) {
     element.nextElementSibling.style.display = 'contents';
