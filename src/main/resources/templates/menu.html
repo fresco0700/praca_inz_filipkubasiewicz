@@ -27,7 +27,6 @@
             Zmianowy</button>
         <button class="add-post-button blue-button" onclick="location.href='/szukajczujki/';">Wyszukiwarka
             Czujek</button>
-        <button class="add-post-button blue-button" onclick="location.href='/sendersms/';">Sender SMS</button>
         <br>
         <button class="add-post-button blue-button"
                 th:if="${#authentication.authorities.![authority].contains('ADMIN')}"

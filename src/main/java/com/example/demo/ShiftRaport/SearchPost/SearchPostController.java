@@ -37,12 +37,12 @@ public class SearchPostController {
 
     @PostMapping(path = "/undelete")
     public String handleUndelete(@RequestParam("id") Long id) {
-        searchPostService.unhideShiftPost(id,true);
+        searchPostService.manageShiftPost(id,true);
         return "szukajwpisu/szukajwpisu";
     }
     @PostMapping(path = "/delete")
     public String handleDelete(@RequestParam("id") Long id) {
-        searchPostService.unhideShiftPost(id,false);
+        searchPostService.manageShiftPost(id,false);
         return "szukajwpisu/szukajwpisu";
     }
 

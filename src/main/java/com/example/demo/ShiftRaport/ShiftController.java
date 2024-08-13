@@ -49,7 +49,7 @@ public class ShiftController {
                                 @RequestParam(defaultValue = "0") int page
                                 ) {
         if (page<0){page=0;}
-        List<Map<String, Object>> posts = shiftService.getShiftPosts(page,post_per_page);
+        List<Map<String, Object>> posts = shiftService.getShiftPostsFromDb(page,post_per_page);
         boolean hasNext = posts.size() > post_per_page;
 
         if (hasNext) {
@@ -187,7 +187,4 @@ public class ShiftController {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
-    @GetMapping("/keep-alive")
-    public void keepAlive() {}
-
 }

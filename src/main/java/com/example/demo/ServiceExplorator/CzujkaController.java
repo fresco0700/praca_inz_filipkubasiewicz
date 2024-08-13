@@ -60,7 +60,7 @@ public class CzujkaController {
 
 
     @PostMapping(path = "/add")
-    public String addService(@RequestParam("monitoringserverid") Long monitoringServerId,
+    public String addCzujka(@RequestParam("monitoringserverid") Long monitoringServerId,
                              @RequestParam("server") String server,
                              @RequestParam("name") String name,
                              @RequestParam("admin") String admin,
@@ -72,7 +72,7 @@ public class CzujkaController {
     }
 
     @PostMapping(path = "/delete")
-    public String deleteService(@RequestParam("id") Long id, HttpServletRequest request) {
+    public String deleteCzujka(@RequestParam("id") Long id, HttpServletRequest request) {
 
         czujkaService.deleteCzujka(id);
         String referer = request.getHeader("Referer");

@@ -28,10 +28,10 @@ public class AdminService {
 
 
     protected String passwordGenerator(int length){
-        final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
-        final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        final String DIGITS = "0123456789";
-        final String ALLOWED_CHARS = LOWERCASE + UPPERCASE + DIGITS;
+        final String LCASE = "abcdefghijklmnopqrstuvwxyz";
+        final String UCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final String DIG = "0123456789";
+        final String ALLOWED_CHARS = LCASE + UCASE + DIG;
         final SecureRandom RANDOM = new SecureRandom();
         StringBuilder password = new StringBuilder(length);
 
@@ -39,7 +39,6 @@ public class AdminService {
             char randomChar = ALLOWED_CHARS.charAt(RANDOM.nextInt(ALLOWED_CHARS.length()));
             password.append(randomChar);
         }
-
         return password.toString();
     }
 

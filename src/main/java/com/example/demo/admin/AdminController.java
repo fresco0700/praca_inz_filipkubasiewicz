@@ -30,7 +30,6 @@ public class AdminController {
     public String showUsers(Model model){
         model.addAttribute("users", adminService.listUsers());
         return "adminusers";
-
     }
 
     @GetMapping(path = "/stats")
@@ -55,7 +54,7 @@ public class AdminController {
             model.addAttribute("newpassword", newPassword);
             return "passchanged";
         }
-        else return "Brak takiego usera";
+        else return "Taki uzytkownik nie istnieje";
     }
 
     @PostMapping(path = "/adduser/add")

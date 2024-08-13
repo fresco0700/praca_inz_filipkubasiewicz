@@ -34,11 +34,10 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> optionalUser = userRepository.findByUsername(auth.getName());
 
-        if (!optionalUser.isPresent()) {return "passnotok";}
-
-        if (newPassword.length() <6){return "passnotok";}
+        if (!optionalUser.isPresent() || newPassword.length() < 6) {
+            return "passnotok";
+        }
         User user = optionalUser.get();
-
         if (bCryptPasswordEncoder.matches(currentPassword, user.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(newPassword));
             userRepository.save(user);

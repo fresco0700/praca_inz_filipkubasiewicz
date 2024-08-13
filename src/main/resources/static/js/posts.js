@@ -94,23 +94,6 @@ postContainers.forEach(function(postContainer) {
     }
 });
 
-
-//keepalive
-var timeout;
-var countdownTimeInSeconds = 600;
-// To endpoint aby usera nie wylogowywało jak coś robi
-function keepAlive() {
-    $.get('/keep-alive');
-    resetTimer();
-}
-//Związane z websocetem, czy user coś robi czy nie.
-function resetTimer() {
-    clearTimeout(timeout);
-    timeout = setTimeout(keepAlive, countdownTimeInSeconds * 1000);
-}
-$(document).on('mousemove mousedown touchstart keydown', resetTimer);
-resetTimer();
-
 // Generowanie powiadomienia
 console.log("Zalogowany użytkownik:", loggedInUser);
 var socket = new SockJS('/ws');

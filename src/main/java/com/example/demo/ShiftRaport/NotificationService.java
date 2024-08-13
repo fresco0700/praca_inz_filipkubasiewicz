@@ -12,7 +12,5 @@ public class NotificationService {
 
     public void sendNotification(String message) {
         messagingTemplate.convertAndSend("/topic/notifications", message);
-        System.out.println(messagingTemplate.getUserDestinationPrefix());
-        System.out.println(messagingTemplate.getHeaderInitializer());
     }
 }

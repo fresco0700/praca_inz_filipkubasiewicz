@@ -26,6 +26,6 @@ public class SearchPostService {
     }
 
     @Transactional
-    public void unhideShiftPost(Long id, boolean visible) { shiftRepository.updateVisibilityById(id,visible);}
+    public void manageShiftPost(Long id, boolean visible) { shiftRepository.updateVisibilityById(id,visible);}
 
 }

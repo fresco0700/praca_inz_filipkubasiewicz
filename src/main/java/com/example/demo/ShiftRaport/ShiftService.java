@@ -23,10 +23,10 @@ public class ShiftService {
     private final ObjectMapper objectMapper;
 
     @Transactional
-    public List<Map<String, Object>> getShiftPosts(int page, int size) {
+    public List<Map<String, Object>> getShiftPostsFromDb(int page, int size) {
         Pageable top = PageRequest.of(page, size);
-        Page<ShiftPost> firstTenPosts = shiftRepository.findAllByVisibleIsTrueOrderByEditedDateDesc(top);
-        List<ShiftPost> posts = firstTenPosts.getContent();
+        Page<ShiftPost> pagablePosts = shiftRepository.findAllByVisibleIsTrueOrderByEditedDateDesc(top);
+        List<ShiftPost> posts = pagablePosts.getContent();
         List<Map<String, Object>> postMaps = new ArrayList<>();
 
         for (ShiftPost post : posts) {
