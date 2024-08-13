@@ -24,8 +24,7 @@
     <div class="buttons">
         <button class="add-post-button blue-button" onclick="location.href='/zmianowy/';">Raport
             Zmianowy</button>
-        <button class="add-post-button blue-button" onclick="location.href='/szukajczujki/';">Wyszukiwarka
-            Czujek</button>
+        <button class="add-post-button blue-button" onclick="location.href='/szukajczujki/';">Baza wiedzy</button>
         <br>
         <button class="add-post-button blue-button"
                 th:if="${#authentication.authorities.![authority].contains('ADMIN')}"
