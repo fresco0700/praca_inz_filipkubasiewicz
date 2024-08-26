@@ -6,18 +6,21 @@ pipeline {
     }
 
     environment {
-        DOCKER_TAG = '1.8'
-        DOCKER_IMAGE = 'zmianowy'
+        DOCKER_TAG = '2.0'
+        DOCKER_IMAGE = 'zmianowy-inz'
+        SSH_HOST = '<adres-ip-maszyny>'
+        REMOTE_DIR = '<katalog-na-serwerze>'
+        SSH_PORT = '<port ssh>'
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout credentials') {
             steps {
-                git credentialsId: 'jenkins-github-pat', branch: 'master', url: 'https://github.com/fresco0700/SpringSec5x.git'
+                // Repozytorium do skonfigurowania  np. git credentialsId: 'jenkins-github-pat', branch: 'master', url: 'https://github.com/fresco0700/praca_inz_filipkubasiewicz.git'
             }
         }
 
-        stage('Build without Tests') {
+        stage('Build application') {
             steps {
                 sh 'mvn clean package -DskipTests'
             }
@@ -28,6 +31,23 @@ pipeline {
                 script {
                     sh "mvn compile jib:buildTar"
                 }
+                
+
+            }
+        }
+
+        stage('Transfer Docker Image to backend server') {
+            steps {
+                sh """
+                scp -P ${SSH_PORT} target/jib-image.tar jenkins@${SSH_HOST}:${REMOTE_DIR}/
+                """
+            }
+        }
+        stage('Load Docker Image and Deploy') {
+            steps {
+                sh """
+                ssh -p ${SSH_PORT} jenkins@${SSH_HOST} 'docker load -i ${REMOTE_DIR}/jib-image.tar && docker-compose -f ${REMOTE_DIR}/docker-compose.yaml up -d'
+                """
             }
         }
     }
@@ -35,10 +55,11 @@ pipeline {
     post {
         success {
             script {
-                    sh 'mv target/jib-image.tar target/${DOCKER_IMAGE}:${DOCKER_TAG}.tar'
+                
+                sh ''
                 }
             archiveArtifacts 'target/*.jar'
-            archiveArtifacts "target/${DOCKER_IMAGE}:${DOCKER_TAG}.tar"
+            archiveArtifacts "target/jib-image.tar"
         }
 
         failure {
