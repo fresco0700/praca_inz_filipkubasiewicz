@@ -8,15 +8,17 @@ pipeline {
     environment {
         DOCKER_TAG = '2.0'
         DOCKER_IMAGE = 'zmianowy-inz'
-        SSH_HOST = '<adres-ip-maszyny>'
-        REMOTE_DIR = '<katalog-na-serwerze>'
-        SSH_PORT = '<port ssh>'
+        SSH_HOST = '57.129.135.105'
+        REMOTE_DIR = '/home/jenkins/zmianowy'
+        SSH_PORT = '22'
     }
 
     stages {
         stage('Checkout credentials') {
             steps {
-                // Repozytorium do skonfigurowania  np. git credentialsId: 'jenkins-github-pat', branch: 'master', url: 'https://github.com/fresco0700/praca_inz_filipkubasiewicz.git'
+                git credentialsId: 'jenkins-github-pat',
+                branch: 'master',                      
+                url: 'https://github.com/fresco0700/praca_inz_filipkubasiewicz.git'
             }
         }
 
@@ -46,7 +48,7 @@ pipeline {
         stage('Load Docker Image and Deploy') {
             steps {
                 sh """
-                ssh -p ${SSH_PORT} jenkins@${SSH_HOST} 'docker load -i ${REMOTE_DIR}/jib-image.tar && docker-compose -f ${REMOTE_DIR}/docker-compose.yaml up -d'
+                ssh -p ${SSH_PORT} jenkins@${SSH_HOST} 'docker load -i ${REMOTE_DIR}/jib-image.tar && docker compose -f ${REMOTE_DIR}/docker-compose.yaml up -d'
                 """
             }
         }
