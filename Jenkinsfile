@@ -6,7 +6,7 @@ pipeline {
     } 
 
     environment {
-        DOCKER_TAG = '2.1'
+        DOCKER_TAG = '2.0'
         DOCKER_IMAGE = 'zmianowy-inz'
         SSH_HOST = '57.129.135.105'
         REMOTE_DIR = '/home/jenkins/zmianowy'
