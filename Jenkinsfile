@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'M3'
-    }
+    } 
 
     environment {
         DOCKER_TAG = '2.0'
