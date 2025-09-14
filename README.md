@@ -17,7 +17,7 @@ ${MAX_FILE_MB}
 ${POSTS_PER_PAGE}
 ${PATH_TO_FILES}
 ```
-
+ 
 ## Przykład uruchomienia przy użyciu docker-compose
 ```
 services:
